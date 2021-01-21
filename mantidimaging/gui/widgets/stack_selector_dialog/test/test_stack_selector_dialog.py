@@ -3,7 +3,7 @@
 import unittest
 from unittest import mock
 
-from PyQt5.QtWidgets import QWidget, QDialog
+from PyQt5.QtWidgets import QWidget, QDialog, QApplication
 
 from mantidimaging.gui.widgets.stack_selector_dialog.stack_selector_dialog import StackSelectorDialog
 from mantidimaging.test_helpers import start_qapplication
@@ -17,6 +17,9 @@ class FakeMainWindowView(QWidget):
 
 @start_qapplication
 class StackSelectorDialogTest(unittest.TestCase):
+    def tearDown(self):
+        QApplication.closeAllWindows()
+
     def test_message_label_set_to_given_message(self):
         given_message = "given_message"
 

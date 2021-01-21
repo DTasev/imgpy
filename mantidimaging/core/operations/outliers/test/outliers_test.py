@@ -15,14 +15,6 @@ from mantidimaging.core.operations.outliers.outliers import OUTLIERS_BRIGHT
 
 @start_qapplication
 class OutliersTest(unittest.TestCase):
-    """
-    Test outliers filter.
-
-    Tests return value only.
-    """
-    def __init__(self, *args, **kwargs):
-        super(OutliersTest, self).__init__(*args, **kwargs)
-
     def test_executed(self):
         images = th.generate_images()
 

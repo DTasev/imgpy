@@ -12,11 +12,13 @@
 # https://github.com/mantidproject/mantid/tree/aa5ed98034119ed3af79ea91527aa718c87c816c/qt/python/mantidqt/utils/qt/testing
 from __future__ import absolute_import
 
-import gc
 import sys
 import traceback
 
+from PyQt5 import sip
 from PyQt5.QtWidgets import QApplication
+
+from mantidimaging.gui.windows.main import MainWindowView
 
 _QAPP = QApplication.instance()
 
@@ -55,7 +57,14 @@ def start_qapplication(cls):
         setUpClass_orig()
 
     def tearDownClass(cls):
-        gc.collect()
+        for ii in QApplication.allWidgets():
+            try:
+                ii.destroy()
+                if not sip.isdeleted(ii):
+                    sip.delete(ii)
+            except RuntimeError:
+                # This can happen with weirdness between python 3.8 and C++
+                pass
 
     setUpClass_orig = cls.setUpClass if hasattr(cls, 'setUpClass') else do_nothing
     setattr(cls, 'setUpClass', classmethod(setUpClass))

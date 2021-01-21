@@ -28,7 +28,6 @@ class StackVisualiserViewTest(unittest.TestCase):
         super(StackVisualiserViewTest, self).__init__(*args, **kwargs)
 
     def tearDown(self) -> None:
-        sip.delete(self.view)  # type: ignore
         self.view = None
         self.window = None  # type: ignore[assignment]
         self.dock = None

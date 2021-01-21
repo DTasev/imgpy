@@ -4,6 +4,8 @@
 import unittest
 from unittest import mock
 
+from PyQt5 import sip
+
 from mantidimaging.core.net.help_pages import SECTION_USER_GUIDE
 from mantidimaging.core.utility.data_containers import ScalarCoR, Degrees, Slope
 from mantidimaging.gui.windows.main import MainWindowView
